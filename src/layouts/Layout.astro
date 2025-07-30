@@ -13,18 +13,9 @@ import Footer from '../components/Footer.astro';
 		<meta name="generator" content={Astro.generator} />
 		<title>RTS</title>
 	</head>
-	<body>
+	<body class="bg-blue-400 min-h-screen flex flex-col">
 		<Header />
 		<slot />
 		<Footer />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
