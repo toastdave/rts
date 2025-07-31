@@ -41,20 +41,23 @@ export default function StockForm() {
     });
     const data = await response.json();
     console.log("data", data);
-    if (data.symbol) {
-      setResponseMessage(data.symbol);
+    if (data.open) {
+      setResponseMessage(data.open);
+    }
+    if (data.message) {
+      setResponseMessage(data.message);
     }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-w-md">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-w-md flex flex-col items-center">
         <FormField
           control={form.control}
           name="symbol"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Symbol</FormLabel>
+              <FormLabel className="text-xl">Find Any Stock Open Price</FormLabel>
               <FormControl>
                 <Input
                   placeholder="Symbol"
@@ -63,11 +66,10 @@ export default function StockForm() {
                   name="symbol"
                   autoComplete="symbol"
                   required
-                  className="border-green-400"
                 />
               </FormControl>
               <FormDescription>
-                Choose a symbol, any symbol.
+                Choose a symbol and submit to find the open price.
               </FormDescription>
               <FormMessage />
             </FormItem>

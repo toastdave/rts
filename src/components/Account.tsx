@@ -1,0 +1,75 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+import { signIn, signOut } from "@/lib/auth-client";
+import { Button } from "@/components/ui/button";
+
+const Account = ({
+  name,
+  image,
+  loggedIn,
+}: {
+  name: string;
+  image: string;
+  loggedIn: boolean;
+}) => {
+  return (
+    <div>
+      <Popover>
+        <PopoverTrigger>
+          <Avatar>
+            {loggedIn ? (
+              image ? (
+                <AvatarImage src={image} />
+              ) : (
+                <AvatarImage src="https://github.com/shadcn.png" />
+              )
+            ) : (
+              <AvatarFallback></AvatarFallback>
+            )}
+
+            {loggedIn ? (
+              name ? (
+                <AvatarFallback>{name.charAt(0).toUpperCase()}</AvatarFallback>
+              ) : (
+                <AvatarFallback></AvatarFallback>
+              )
+            ) : (
+              <AvatarFallback></AvatarFallback>
+            )}
+          </Avatar>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="flex flex-col gap-2 bg-neutral-900 text-white">
+            {loggedIn ? (
+              <Button
+                className="p-2 hover:cursor-pointer"
+                onClick={() =>
+                  signOut({
+                    fetchOptions: {
+                      onSuccess: () => {
+                        window.location.href = "/login";
+                      },
+                    },
+                  })
+                }
+              >
+                Logout
+              </Button>
+            ) : (
+              <a href="/login" className="hover:cursor-pointer">
+                Login
+              </a>
+            )}
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
+  );
+};
+
+export default Account;
