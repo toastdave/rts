@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Button } from "@/components/ui/button";
+import StockForm from "@/components/StockForm";
+// export const prerender = false;
 ---
 
 <Layout>
-  <div class="flex-1 bg-amber-400">
-    <h1>Hello World</h1>
-    <Button>Click me</Button>
+  <div class="flex-1 bg-neutral-800">
+    <StockForm client:load />
   </div>
 </Layout>
