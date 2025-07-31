@@ -1,11 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import StockForm from "@/components/StockForm";
-// export const prerender = false;
+
+export const prerender = false;
+
+// Check if user is authenticated
+console.log("session", Astro.locals.session);
+if (Astro.locals.session == null) {
+  // If no session, redirect to login page
+  return Astro.redirect("/login");
+}
+
+// If we get here, we have a session
+const session = Astro.locals.session;
 ---
 
 <Layout>
-  <div class="flex-1 bg-neutral-800">
+  <div class="flex-1 p-4">
     <StockForm client:load />
   </div>
 </Layout>

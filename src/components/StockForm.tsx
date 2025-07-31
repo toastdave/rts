@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import type { Session } from "better-auth";
 
 const formSchema = z.object({
   symbol: z.string().max(14, {
@@ -47,7 +48,7 @@ export default function StockForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 max-w-md">
         <FormField
           control={form.control}
           name="symbol"
@@ -62,6 +63,7 @@ export default function StockForm() {
                   name="symbol"
                   autoComplete="symbol"
                   required
+                  className="border-green-400"
                 />
               </FormControl>
               <FormDescription>
@@ -71,7 +73,7 @@ export default function StockForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="bg-green-400 text-white">Submit</Button>
         {responseMessage && <p>{responseMessage}</p>}
       </form>
     </Form>
