@@ -6,12 +6,29 @@ const user = Astro.locals.user;
 console.log(user);
 ---
 
-<header class="sticky top-0 z-50 p-4 text-white shadow-md border-b border-green-400 flex justify-between items-center">
+<header
+  class="sticky top-0 z-50 flex items-center justify-between border-b border-green-400 bg-neutral-900 p-4 text-white shadow-md"
+>
   <a href="/" class="flex items-center">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 text-green-400 mr-2">
-    <path d="M12 20V10"></path>
-    <path d="M18 20V4"></path>
-    <path d="M6 20v-6"></path>
-  </svg><h1 class="text-2xl font-semibold">RTS Stocks</h1></a>
-  <Account client:load loggedIn={session !== null} name={user?.name ?? ""} image={user?.image ?? ""} />
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="mr-2 h-6 w-6 text-green-400"
+    >
+      <path d="M12 20V10"></path>
+      <path d="M18 20V4"></path>
+      <path d="M6 20v-6"></path>
+    </svg><h1 class="text-2xl font-semibold">RTS Stocks</h1></a
+  >
+  <Account
+    client:load
+    loggedIn={session !== null}
+    name={user?.name ?? ""}
+    image={user?.image ?? ""}
+  />
 </header>
