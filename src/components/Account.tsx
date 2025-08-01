@@ -21,7 +21,7 @@ const Account = ({
     <div>
       <Popover>
         <PopoverTrigger>
-          <Avatar>
+          <Avatar data-testid='avatar'>
             {loggedIn ? (
               image ? (
                 <AvatarImage src={image} />
@@ -47,6 +47,7 @@ const Account = ({
           <div className="flex flex-col gap-2 bg-neutral-900 text-white">
             {loggedIn ? (
               <Button
+                data-testid="logout-button"
                 className="p-2 hover:cursor-pointer"
                 onClick={() =>
                   signOut({

@@ -35,9 +35,13 @@ export default function StockForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    const trimmedValues = {
+      symbol: values.symbol.trim()
+    };
+
     const response = await fetch("/api/alpaca", {
       method: "POST",
-      body: JSON.stringify(values),
+      body: JSON.stringify(trimmedValues),
     });
     const data = await response.json();
     console.log("data", data);
@@ -75,8 +79,8 @@ export default function StockForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-green-400 text-white">Submit</Button>
-        {responseMessage && <p>{responseMessage}</p>}
+        <Button type="submit" className="bg-green-400 text-white hover:bg-neutral-900 hover:border-green-400 hover:border-1 hover:cursor-pointer">Submit</Button>
+        {responseMessage && <p id="responseMessage">{responseMessage}</p>}
       </form>
     </Form>
   );

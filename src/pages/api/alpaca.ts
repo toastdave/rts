@@ -10,7 +10,7 @@ export const POST: APIRoute = async ({ request }) => {
   console.log("data", data);
   const symbol = data.symbol;
   console.log("symbol", symbol);
-  
+
   if (!symbol) {
     return new Response(
       JSON.stringify({
@@ -19,17 +19,26 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 400 },
     );
   }
-  
+
   const alpaca = new Alpaca({
     keyId: import.meta.env.ALPACA_KEY,
     secretKey: import.meta.env.ALPACA_SECRET,
     // paper: true,
   });
 
-  let bar: AlpacaBar;
+  let bar: AlpacaBar | null = null;
   try {
-    bar = await alpaca.getLatestBar(symbol.toUpperCase());
-    console.log("bar", bar);
+    const barIterator = await alpaca.getBarsV2(symbol.toUpperCase(), {
+      feed: "sip",
+      timeframe: "1D",
+      limit: "1",
+    });
+
+    for await (const b of barIterator) {
+      bar = b;
+      break;
+    }
+    console.log("bar", bar?.OpenPrice);
   } catch (error) {
     console.error(error);
     return new Response(
@@ -40,10 +49,10 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const open = `$${bar.OpenPrice}`;
+  const open = `$${bar?.OpenPrice}`;
 
   return new Response(
-    JSON.stringify({
+    JSON.stringify({  
       open,
     }),
     { status: 200 },
