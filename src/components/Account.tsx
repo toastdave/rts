@@ -26,7 +26,7 @@ const Account = ({
               image ? (
                 <AvatarImage src={image} />
               ) : (
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage src="https://i1.sndcdn.com/artworks-mVzibIwATVPLVzuL-f5yD0Q-t500x500.jpg" />
               )
             ) : (
               <AvatarFallback></AvatarFallback>

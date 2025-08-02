@@ -27,11 +27,18 @@ export const POST: APIRoute = async ({ request }) => {
   });
 
   let bar: AlpacaBar | null = null;
+
+  const tenDaysAgo = new Date();
+  tenDaysAgo.setDate(tenDaysAgo.getDate() - 10);
+  tenDaysAgo.setHours(0, 0, 0, 0);
+
   try {
     const barIterator = await alpaca.getBarsV2(symbol.toUpperCase(), {
-      feed: "sip",
+      feed: "iex",
       timeframe: "1D",
-      limit: "1",
+      limit: "10",
+      sort: "desc",
+      start: tenDaysAgo.toISOString(),
     });
 
     for await (const b of barIterator) {

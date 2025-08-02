@@ -130,7 +130,7 @@ export function SignUpForm({
             disabled={loading}
           >
             {loading ? <Loader2 className="mr-2 animate-spin" /> : null}
-            Login
+            Sign Up
           </Button>
         </form>
       </Form>
